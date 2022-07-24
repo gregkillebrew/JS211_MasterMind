@@ -28,15 +28,68 @@ const getRandomInt = (min, max) => {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-const generateHint = () =>  {
-  // your code here
+const generateHint = (guess) =>  {
+  guess - guess.trim().toLowerCase()
+
+  let solutionArray = []
+  solutionArray = solution.split("")
+  let guessArray = []
+  guessArray = guess.slice("")
+
+// create a variable correctLetterLocations and set to 0
+let correctLetterLocations = 0
+
+ for (let i=0; i < solutionArray.length; i++){
+
+ if (solutionArray[i] === guessArray[i]) {
+  correctLetterLocations++
+   solutionArray[i] = null;
+ }
+
+}
+
+ let correctLetter = 0
+
+ for (let i=0; i< solutionArray.length; i++){
+    let targetIndex = solutionArray.indexOf(guessArray[i])
+
+ if (targetIndex > -1) {
+
+  correctLetter++
+  solutionArray[i] = null;
+ }
+}
+
+let hint = correctLetterLocations + "" + correctLetter
+
+console.log(hint)
+
+return hint
+
 }
 
 const mastermind = (guess) => {
-  solution = 'abcd'; // Comment this out to generate a random solution
-  // your code here
-}
+  solution = 'abcd'; 
+  let hint = generateHint(guess)
 
+  
+  
+  
+  
+  if (guess === solution) {
+    console.log("Guessed it!")
+  }
+
+  else {
+  }
+
+  board.push(guess+""+ hint)
+  
+  if (board.length >10) {
+  console.log ('Ran outta turns! The solution was' + solution)
+  return 'Ran outta turns! The solution was' + solution
+}
+}
 
 const getPrompt = () =>  {
   rl.question('guess: ', (guess) => {
